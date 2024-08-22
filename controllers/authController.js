@@ -15,7 +15,7 @@ const convertImageToBase64 = (imagePath) => {
   return `data:image/png;base64,${imageAsBase64_2}`;
 };
 const imageBase64 = convertImageToBase64("../assets/templt.png");
-const imageBase64_2 = convertImageToBase64("../assets/jdl.png");
+const imageBase64_2 = convertImageToBase64("../assets/JDL.png");
 exports.registerAdmin = async (req, res) => {
   const { email, password } = req.body;
 
