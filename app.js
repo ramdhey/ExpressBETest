@@ -4,7 +4,7 @@ const cors = require("cors");
 const routes = require("./routes/index");
 require("dotenv").config();
 const sequelize = require("./config/db");
-const https = require("https");
+const http = require("http");
 
 const app = express();
 
@@ -20,7 +20,7 @@ sequelize
     console.log("Database & tables synced!");
 
     // Server and Socket.io setup
-    const server = https.createServer(app);
+    const server = http.createServer(app);
 
     // Port listening
     const PORT = process.env.PORT || 5000;

@@ -46,7 +46,7 @@ exports.registerUser = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const serverUrl = `${req.secure ? "https" : "http"}://${req.get("host")}`;
+    const serverUrl = `https://${req.get("host")}`;
     const avatarPath = req.file ? `/uploads/${req.file.filename}` : "";
     const avatarURL = `${serverUrl}${avatarPath}`;
     const ServerUrl = process.env.SERVER_URL;
