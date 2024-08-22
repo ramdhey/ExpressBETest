@@ -64,24 +64,20 @@ const Application = sequelize.define("Application", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  last_education: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   education_details: {
-    type: DataTypes.TEXT,
+    type: DataTypes.JSONB,
     allowNull: false,
   },
   training_history: {
-    type: DataTypes.TEXT,
+    type: DataTypes.JSONB,
     allowNull: false,
   },
   work_experience: {
-    type: DataTypes.TEXT,
+    type: DataTypes.JSONB,
     allowNull: false,
   },
   skills: {
-    type: DataTypes.TEXT,
+    type: DataTypes.ARRAY(DataTypes.STRING), 
     allowNull: false,
   },
   relocation: {
@@ -92,10 +88,7 @@ const Application = sequelize.define("Application", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  foto: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+
   status: {
     type: DataTypes.STRING,
     allowNull: false,

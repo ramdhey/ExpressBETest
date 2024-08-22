@@ -18,7 +18,6 @@ exports.createApplication = async (req, res) => {
     email,
     phone_number,
     emergency_contact,
-    last_education,
     education_details,
     training_history,
     work_experience,
@@ -27,9 +26,7 @@ exports.createApplication = async (req, res) => {
     expected_salary,
   } = req.body;
   const userId = req.user.id;
-  const serverUrl = `${req.protocol}://${req.get("host")}`;
-  const avatarPath = req.file ? `/uploads/${req.file.filename}` : "";
-  const avatarURL = `${serverUrl}${avatarPath}`;
+  
 
   try {
     const newApplication = await Application.create({
@@ -47,14 +44,12 @@ exports.createApplication = async (req, res) => {
       email,
       phone_number,
       emergency_contact,
-      last_education,
-      education_details,
+      education_details, 
       training_history,
-      work_experience,
+      work_experience, 
       skills,
       relocation,
       expected_salary,
-      foto: avatarURL,
       status: "waiting",
       userId,
     });
@@ -277,5 +272,3 @@ exports.deleteApplication = async (req, res) => {
     });
   }
 };
-
-
