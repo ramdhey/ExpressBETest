@@ -46,8 +46,7 @@ exports.registerUser = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const ServerUrl = process.env.SERVER_URL;
-    const serverUrl = ServerUrl;
+    const ServerUrl = process.env.SERVER_URL; // Mengambil Server URL dari environment variable
     const avatarPath = req.file ? `/uploads/${req.file.filename}` : "";
     const avatarURL = `${ServerUrl}${avatarPath}`;
 
