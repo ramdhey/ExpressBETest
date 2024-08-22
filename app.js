@@ -15,7 +15,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/", routes);
 
 sequelize
-  .sync({ force: false }) // Set to true if you want to drop and recreate tables, but be careful with this in production
+  .sync({ alter: true }) // Set to true if you want to drop and recreate tables, but be careful with this in production
   .then(() => {
     console.log("Database & tables synced!");
 

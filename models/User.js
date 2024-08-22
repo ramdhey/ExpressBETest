@@ -31,6 +31,11 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "user", // Nilai default jika tidak ada role yang diberikan
+    },
     confirmed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

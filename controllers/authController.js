@@ -49,6 +49,7 @@ exports.registerUser = async (req, res) => {
     const serverUrl = `${req.protocol}://${req.get("host")}`;
     const avatarPath = req.file ? `/uploads/${req.file.filename}` : "";
     const avatarURL = `${serverUrl}${avatarPath}`;
+    const ServerUrl = process.env.SERVER_URL;
     const confirmationToken = jwt.sign(
       { email }, // Pastikan email dikirim ke sini
       process.env.JWT_SECRET,
@@ -110,7 +111,7 @@ exports.registerUser = async (req, res) => {
                 </tr>
                 <tr>
                   <td>
-                    <a href="http://localhost:2003/confirm/${confirmationToken}" class="button" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Verifikasi Akun</a>
+                    <a href="${ServerUrl}/confirm/${confirmationToken}" class="button" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Verifikasi Akun</a>
                   </td>
                 </tr>
               </table>
@@ -323,5 +324,36 @@ exports.login = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ status: 500, message: "Error saat login", error });
+  }
+};
+
+// Get Profile untuk User atau Admin
+exports.getProfile = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const user = await User.findByPk(userId, {
+      attributes: ["id", "fullname", "email", "username", "role", "photo"], // Sesuaikan field sesuai kebutuhan
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        status: 404,
+        message: "Profil tidak ditemukan",
+      });
+    }
+
+    res.status(200).json({
+      status: 200,
+      message: "Profil berhasil diambil",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: 500,
+      message: "Error saat mengambil profil",
+      error,
+    });
   }
 };
