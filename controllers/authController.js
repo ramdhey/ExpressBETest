@@ -46,10 +46,11 @@ exports.registerUser = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const serverUrl = `https://${req.get("host")}`;
-    const avatarPath = req.file ? `/uploads/${req.file.filename}` : "";
-    const avatarURL = `${serverUrl}${avatarPath}`;
     const ServerUrl = process.env.SERVER_URL;
+    const serverUrl = ServerUrl;
+    const avatarPath = req.file ? `/uploads/${req.file.filename}` : "";
+    const avatarURL = `${ServerUrl}${avatarPath}`;
+
     const confirmationToken = jwt.sign(
       { email }, // Pastikan email dikirim ke sini
       process.env.JWT_SECRET,
